@@ -1,6 +1,8 @@
 package app
 
 import (
+	"github.com/nicosullivan/todo-go/app/jobs/nightly"
+	"github.com/revel/modules/jobs/app/jobs"
 	"github.com/revel/revel"
 )
 
@@ -29,6 +31,7 @@ func init() {
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
+	jobs.Schedule("@midnight", nightly.ReminderEmails{})
 
 	// register startup functions with OnAppStart
 	// revel.DevMode and revel.RunMode only work inside of OnAppStart. See Example Startup Script

@@ -1,0 +1,46 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<header class="jumbotron" style="background-color:#A9F16C">
+    <div class="container">
+        <div class="row">
+            <h1>It works!</h1>
+            <p></p>
+        </div>
+    </div>
+</header>
+
+<div class="col-md-6">
+    {{if not .todos}}
+        <p> No Todos Found</p>
+    {{else}}
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="col-md-1"> Done </th>
+                <th > Title </th>
+            </tr>
+            </thead>
+            {{range .todos}}
+                <tr>
+                    {{if .Done}}
+                        <td class="text-success">{{.Done}}</td>
+                    {{else}}
+                        <td class="text-danger">{{.Done}}</td>
+                    {{end}}
+                    <td>{{.Title}}</td>
+                </tr>
+            {{end}}
+        </table>
+    {{end}}
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            {{template "flash.html" .}}
+        </div>
+    </div>
+</div>
+
+{{template "footer.html" .}}
