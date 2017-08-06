@@ -1,4 +1,4 @@
-package controllers
+package services
 
 import (
 	"github.com/jinzhu/gorm"
@@ -7,9 +7,8 @@ import (
 	"github.com/revel/revel"
 )
 
-type DatabaseController struct {
-	*revel.Controller
-	db *gorm.DB
+type Database struct {
+	Orm *gorm.DB
 }
 
 func InitDB() {
@@ -22,17 +21,17 @@ func InitDB() {
 	db.AutoMigrate(&models.Todo{})
 }
 
-func (c *DatabaseController) Open() revel.Result {
+func (c *Database) Open() revel.Result {
 	var err error
-	c.db, err = gorm.Open("postgres", "host=localhost user=postgres dbname=gorm sslmode=disable password=postgres")
+	c.Orm, err = gorm.Open("postgres", "host=localhost user=postgres dbname=gorm sslmode=disable password=postgres")
 	if err != nil {
 		panic(err)
 	}
-	c.db.SingularTable(true)
+	c.Orm.SingularTable(true)
 	return nil
 }
 
-func (c *DatabaseController) Close() revel.Result {
-	c.db.Close()
+func (c *Database) Close() revel.Result {
+	c.Orm.Close()
 	return nil
 }
