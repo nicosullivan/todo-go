@@ -1,33 +1,29 @@
 {{set . "title" "Home"}}
 {{template "header.html" .}}
+<script src="/public/js/todo.js"></script>
 
-<header class="jumbotron" style="background-color:#A9F16C">
-    <div class="container">
-        <div class="row">
-            <h1>It works!</h1>
-            <p></p>
-        </div>
-    </div>
-</header>
-
-<div class="col-md-6">
+<div class="container">
+    <a class="waves-effect waves-light btn modal-trigger" href="#create-modal">Create</a>
     {{if not .todos}}
         <p> No Todos Found</p>
     {{else}}
-        <table class="table table-bordered table-striped">
+        <table class="highlight">
             <thead>
             <tr>
-                <th class="col-md-1"> Done </th>
+                <th class="col s1 center"> Done </th>
                 <th > Title </th>
             </tr>
             </thead>
             {{range .todos}}
                 <tr>
-                    {{if .Done}}
-                        <td class="text-success">{{.Done}}</td>
-                    {{else}}
-                        <td class="text-danger">{{.Done}}</td>
-                    {{end}}
+                    <td class="center">
+                        <input type="checkbox"
+                        {{if .Done}}
+                             checked
+                        {{end}}
+                               id="{{.ID}}" data-url="todo" class="todo-checkbox">
+                        <label for="{{.ID}}"></label>
+                    </td>
                     <td>{{.Title}}</td>
                 </tr>
             {{end}}
@@ -43,4 +39,5 @@
     </div>
 </div>
 
+{{template "Todo/Create.html"}}
 {{template "footer.html" .}}

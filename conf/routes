@@ -8,6 +8,10 @@ module:jobs
 
 
 GET     /                                       App.Index
+GET     /todo                                   Todo.Index
+POST    /todo/new                               Todo.New
+PATCH   /todo/:id                               Todo.Save
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

@@ -5,10 +5,10 @@
     <title>{{.title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-3.3.6.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/materialize/css/materialize.min.css">
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
     <script src="/public/js/jquery-2.2.4.min.js"></script>
-    <script src="/public/js/bootstrap-3.3.6.min.js"></script>
+    <script src="/public/materialize/js/materialize.min.js"></script>
     {{range .moreStyles}}
       <link rel="stylesheet" type="text/css" href="/public/{{.}}">
     {{end}}
@@ -17,3 +17,12 @@
     {{end}}
   </head>
   <body>
+
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Todo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="create">Create</a></li>
+    </ul>
+  </div>
+</nav>

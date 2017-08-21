@@ -1,21 +1,22 @@
-{{set . "title" "Home"}}
-{{template "header.html" .}}
-
-<header class="jumbotron" style="background-color:#A9F16C">
-    <div class="container">
-        <div class="row">
-            <h1>created!</h1>
-            <p></p>
-        </div>
+<div id="create-modal" class="modal">
+    <div class="modal-content">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="title" type="text">
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="description" class="materialize-textarea"></textarea>
+                    <label for="description">Description</label>
+                </div>
+            </div>
+        </form>
     </div>
-</header>
-
-<div class="container">
-    <div class="row">
-        <div class="span6">
-            {{template "flash.html" .}}
-        </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" data-url="todo/new">Save</a>
     </div>
 </div>
-
-{{template "footer.html" .}}
