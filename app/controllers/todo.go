@@ -24,10 +24,6 @@ func (c Todo) Index() revel.Result {
 	return c.Render(todos)
 }
 
-func (c Todo) Create() revel.Result {
-	return c.Render()
-}
-
 func (c Todo) New() revel.Result {
 	var newTodo models.Todo
 	response := JsonResponse{Success: true}
@@ -70,6 +66,21 @@ func (c Todo) Save(id uint) revel.Result {
 	}
 
 	c.Orm.Save(&todo)
+
+	return c.RenderJSON(response)
+}
+
+func (c Todo) Delete(id uint) revel.Result {
+	var todo models.Todo
+	todo.ID = id
+	response := JsonResponse{Success: true}
+
+	c.Orm.Delete(&todo)
+
+	if err := c.Orm.Error; err != nil {
+		response.Success = false
+		log.Print(err)
+	}
 
 	return c.RenderJSON(response)
 }

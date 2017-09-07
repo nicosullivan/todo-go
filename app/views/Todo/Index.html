@@ -7,25 +7,16 @@
     {{if not .todos}}
         <p> No Todos Found</p>
     {{else}}
-        <table class="highlight">
+        <table class="highlight" id="todo-table">
             <thead>
             <tr>
                 <th class="col s1 center"> Done </th>
                 <th > Title </th>
+                <th class="col s1 center"> Delete </th>
             </tr>
             </thead>
             {{range .todos}}
-                <tr>
-                    <td class="center">
-                        <input type="checkbox"
-                        {{if .Done}}
-                             checked
-                        {{end}}
-                               id="{{.ID}}" data-url="todo" class="todo-checkbox">
-                        <label for="{{.ID}}"></label>
-                    </td>
-                    <td>{{.Title}}</td>
-                </tr>
+                {{template "Todo/partial/todo-row.html" .}}
             {{end}}
         </table>
     {{end}}

@@ -1,0 +1,18 @@
+<tr id="{{.ID}}">
+    <td class="center">
+        <input type="checkbox"
+               {{if .Done}}
+               checked
+               {{end}}
+               data-id="{{.ID}}" id="checkbox-{{.ID}}" data-url="todo">
+        <label class="todo-checkbox" for="checkbox-{{.ID}}"></label>
+    </td>
+    <td>{{.Title}}</td>
+    <td class="center">
+        <a href="#" class="delete-todo" style="color: inherit;">
+            <i class="material-icons" data-url="todo" data-id="{{.ID}}">
+                delete
+            </i>
+        </a>
+    </td>
+</tr>

@@ -11,6 +11,7 @@ GET     /                                       App.Index
 GET     /todo                                   Todo.Index
 POST    /todo/new                               Todo.New
 PATCH   /todo/:id                               Todo.Save
+DELETE  /todo/:id                               Todo.Delete
 
 
 # Ignore favicon requests

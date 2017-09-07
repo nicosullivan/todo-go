@@ -2,10 +2,10 @@ Todo = ( function () {
     "use strict"
 
     function HandleTodo(e) {
-        var $target = $(e.target)
-        var url = $target.data('url') + '/' + $target.prop('id')
+        var $target = $(e.target).siblings('input');
+        var url = $target.data('url') + '/' + $target.data('id')
         var data = {
-            done: $target.is(':checked')
+            done: !$target.is(':checked')
         }
 
         $.ajax({
@@ -14,10 +14,9 @@ Todo = ( function () {
             contentType: "application/json; charset=UTF-8",
             data: JSON.stringify(data)
         }).success(function (response) {
-            if (response.success) {
-                Materialize.toast('Save Successful!', 2000)
-            } else {
+            if (!response.success) {
                 Materialize.toast('An error occurred.', 2000)
+                $target.prop('checked', !$target.is(':checked'))
             }
         })
     }
@@ -47,9 +46,27 @@ Todo = ( function () {
         })
     }
 
+    function HandleDelete(e) {
+        var url = $(e.target).data('url') + '/' + $(e.target).data('id')
+
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            contentType: "application/json; charset=UTF-8",
+        }).success(function (response) {
+            if (response.success) {
+                $('#'+$(e.target).data('id')).remove()
+                Materialize.toast('Delete Successful', 2000)
+            } else {
+                Materialize.toast('An error occurred.', 2000)
+            }
+        })
+    }
+
     function init () {
-        $(document).on('change', '.todo-checkbox', HandleTodo)
+        $(document).on('click', '.todo-checkbox', HandleTodo)
         $(document).on('click', '.waves-green', HandleCreate)
+        $(document).on('click', '.delete-todo', HandleDelete)
         $(document).on('ready', function () { $('.modal').modal() })
     }
 
